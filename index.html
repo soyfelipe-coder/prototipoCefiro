@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Céfiro Ventilación — Ventiladores HVLS Industriales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111318;
+    --dark2: #1a1d24;
+    --dark3: #22262f;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #8a8880;
+    --muted2: #5a5855;
+    --accent: #e8610a;
+    --accent2: #f07d30;
+    --accent-dim: rgba(232,97,10,0.12);
+    --accent-dim2: rgba(232,97,10,0.06);
+    --white: #ffffff;
+    --success: #3ecf8e;
+    --font-head: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-head); font-size: 20px; font-weight: 800;
+    letter-spacing: 0.08em; color: var(--white); text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900; color: white;
+  }
+  .nav-links {
+    display: flex; gap: 0; list-style: none;
+  }
+  .nav-links a {
+    display: block; padding: 8px 14px;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.03em;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    display: flex; gap: 10px; align-items: center;
+  }
+  .btn-nav {
+    padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font-head); letter-spacing: 0.06em; cursor: pointer;
+    text-decoration: none; transition: all 0.2s;
+    border: 1px solid var(--accent); color: var(--accent); background: transparent;
+  }
+  .btn-nav:hover { background: var(--accent); color: white; }
+  .btn-nav-fill {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .btn-nav-fill:hover { background: var(--accent2); border-color: var(--accent2); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 120px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(232,97,10,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 90% 80%, rgba(232,97,10,0.04) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+    background-image: linear-gradient(var(--border2) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--accent); text-transform: uppercase;
+    background: var(--accent-dim); border: 1px solid rgba(232,97,10,0.2);
+    padding: 5px 12px; border-radius: 4px; margin-bottom: 24px;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(52px, 7vw, 80px);
+    font-weight: 900; line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--white); margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero-sub {
+    font-family: var(--font-head); font-size: 22px; font-weight: 400;
+    color: var(--muted); margin-bottom: 24px; letter-spacing: 0.02em;
+  }
+  .hero p {
+    font-size: 17px; color: var(--muted); max-width: 520px;
+    line-height: 1.7; margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 6px;
+    font-family: var(--font-head); font-size: 15px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: white;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border2);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-ghost {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border);
+    font-size: 13px; padding: 10px 20px;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: var(--border2); }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px; padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-stat-num {
+    font-family: var(--font-head); font-size: 36px; font-weight: 800;
+    color: var(--white);
+  }
+  .hero-stat-num span { color: var(--accent); }
+  .hero-stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* hero calc preview card */
+  .hero-card {
+    background: var(--dark2);
+    border: 1px solid var(--border2);
+    border-radius: 12px; overflow: hidden;
+  }
+  .hero-card-head {
+    background: var(--dark3); padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-card-head::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  }
+  .hero-card-body { padding: 24px; }
+  .calc-field { margin-bottom: 16px; }
+  .calc-field label {
+    display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  .calc-field input, .calc-field select {
+    width: 100%; padding: 10px 14px;
+    background: var(--dark3); border: 1px solid var(--border2);
+    border-radius: 6px; color: var(--text); font-family: var(--font-body);
+    font-size: 15px; outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+  .calc-field input:focus, .calc-field select:focus {
+    border-color: var(--accent);
+  }
+  .calc-field select option { background: var(--dark3); }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .calc-result {
+    background: var(--dark3); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 16px; margin-top: 16px;
+    display: none;
+  }
+  .calc-result.show { display: block; }
+  .calc-result-label {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .calc-result-model {
+    font-family: var(--font-head); font-size: 28px; font-weight: 800;
+    color: var(--white);
+  }
+  .calc-result-model span { color: var(--accent); }
+  .calc-result-meta {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;
+  }
+  .calc-meta-item { }
+  .calc-meta-val {
+    font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--white);
+  }
+  .calc-meta-val span { color: var(--accent); }
+  .calc-meta-key { font-size: 12px; color: var(--muted); }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 100px 40px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-tag::before {
+    content: ''; display: block; width: 20px; height: 2px; background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--font-head); font-size: clamp(36px, 4vw, 52px);
+    font-weight: 900; color: var(--white); line-height: 1;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 17px; color: var(--muted); max-width: 600px; line-height: 1.7;
+  }
+  .divider {
+    height: 1px; background: var(--border); margin: 0 40px;
+  }
+
+  /* ─── PRODUCTOS ─── */
+  #productos { background: var(--dark); }
+  .products-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    margin-bottom: 40px;
+  }
+  .product-card {
+    background: var(--dark2); padding: 32px 28px;
+    border: 1px solid var(--border);
+    transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;
+  }
+  .product-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .product-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .product-card:hover::before { transform: scaleX(1); }
+  .product-card.featured {
+    background: var(--dark3);
+    border-color: rgba(232,97,10,0.3);
+  }
+  .product-card.featured::before { transform: scaleX(1); }
+  .prod-badge {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 4px;
+    background: var(--accent-dim); color: var(--accent);
+    border: 1px solid rgba(232,97,10,0.2); margin-bottom: 20px;
+  }
+  .prod-model {
+    font-family: var(--font-head); font-size: 32px; font-weight: 900;
+    color: var(--white); letter-spacing: 0.02em;
+  }
+  .prod-type {
+    font-size: 12px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 24px;
+  }
+  .prod-specs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .prod-spec {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .prod-spec:last-child { border-bottom: none; }
+  .prod-spec-key { font-size: 12px; color: var(--muted); }
+  .prod-spec-val { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--white); }
+  .prod-spec-val .accent { color: var(--accent); }
+  .prod-link {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--accent);
+    text-decoration: none; margin-top: 8px;
+    transition: gap 0.2s;
+  }
+  .prod-link:hover { gap: 10px; }
+
+  /* ─── CALCULADORA (sección completa) ─── */
+  #calculadora { background: var(--black); }
+  .calc-section-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .calc-big {
+    background: var(--dark2); border: 1px solid var(--border2);
+    border-radius: 12px; overflow: hidden;
+  }
+  .calc-big-head {
+    background: var(--accent); padding: 20px 28px;
+    font-family: var(--font-head); font-size: 14px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: white;
+  }
+  .calc-big-body { padding: 32px; }
+  .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .calc-field-big label {
+    display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  }
+  .calc-field-big input, .calc-field-big select {
+    width: 100%; padding: 12px 16px;
+    background: var(--dark3); border: 1px solid var(--border2);
+    border-radius: 6px; color: var(--text); font-family: var(--font-body);
+    font-size: 16px; outline: none; transition: border-color 0.2s; appearance: none;
+  }
+  .calc-field-big input:focus, .calc-field-big select:focus { border-color: var(--accent); }
+  .calc-full { grid-column: 1 / -1; }
+  .calc-big-result {
+    margin-top: 8px; padding: 28px;
+    background: var(--dark3); border: 1px solid var(--border2);
+    border-radius: 8px; display: none;
+  }
+  .calc-big-result.show { display: block; }
+  .calc-big-result-title {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+  }
+  .calc-big-result-main {
+    font-family: var(--font-head); font-size: 48px; font-weight: 900;
+    color: var(--white); line-height: 1;
+  }
+  .calc-big-result-main span { color: var(--accent); }
+  .calc-big-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px;
+  }
+  .calc-big-stat {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px;
+  }
+  .calc-big-stat-num {
+    font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--white);
+  }
+  .calc-big-stat-num .pos { color: var(--success); }
+  .calc-big-stat-num .neg { color: var(--accent); }
+  .calc-big-stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .calc-cta-strip {
+    background: var(--accent-dim); border: 1px solid rgba(232,97,10,0.2);
+    border-radius: 8px; padding: 16px 20px; margin-top: 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .calc-cta-text { font-size: 14px; color: var(--text); }
+  .calc-cta-text strong { color: var(--white); }
+
+  /* calc explainer */
+  .calc-explainer { }
+  .how-step {
+    display: flex; gap: 20px; padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .how-step:last-child { border-bottom: none; }
+  .how-num {
+    font-family: var(--font-head); font-size: 48px; font-weight: 900;
+    color: var(--accent-dim2); line-height: 1; flex-shrink: 0; width: 48px;
+    border: 1px solid rgba(232,97,10,0.15); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-dim2);
+    color: var(--accent);
+    font-size: 22px;
+  }
+  .how-content h3 {
+    font-family: var(--font-head); font-size: 22px; font-weight: 700;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .how-content p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .how-content .pill {
+    display: inline-block; margin-top: 10px; padding: 4px 12px; border-radius: 20px;
+    font-size: 13px; font-weight: 600; background: var(--accent-dim);
+    color: var(--accent); border: 1px solid rgba(232,97,10,0.2);
+  }
+
+  /* ─── APLICACIONES ─── */
+  #aplicaciones { background: var(--dark); }
+  .apps-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px;
+  }
+  .app-card {
+    position: relative; overflow: hidden; aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+  .app-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.45) saturate(0.7);
+    transition: all 0.5s;
+  }
+  .app-card:hover img { filter: brightness(0.35) saturate(0.5); transform: scale(1.04); }
+  .app-card-content {
+    position: absolute; inset: 0; padding: 28px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .app-card-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  .app-card-title {
+    font-family: var(--font-head); font-size: 26px; font-weight: 800;
+    color: var(--white); line-height: 1.1; margin-bottom: 10px;
+  }
+  .app-card-desc {
+    font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5;
+    max-width: 280px; opacity: 0; transform: translateY(8px);
+    transition: all 0.3s;
+  }
+  .app-card:hover .app-card-desc { opacity: 1; transform: translateY(0); }
+  .app-card-arrow {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; opacity: 0; transform: scale(0.8);
+    transition: all 0.3s;
+  }
+  .app-card:hover .app-card-arrow { opacity: 1; transform: scale(1); }
+
+  /* ─── CASOS ─── */
+  #casos { background: var(--black); }
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .case-card {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 32px; transition: border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .case-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 3px;
+    height: 100%; background: var(--accent); opacity: 0.4;
+  }
+  .case-card:hover { border-color: var(--border2); }
+  .case-company {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+  }
+  .case-title {
+    font-family: var(--font-head); font-size: 20px; font-weight: 700;
+    color: var(--white); margin-bottom: 20px; line-height: 1.2;
+  }
+  .case-flow {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    padding: 14px; background: var(--dark3); border-radius: 6px;
+  }
+  .case-flow-item { text-align: center; flex: 1; }
+  .case-flow-val {
+    font-family: var(--font-head); font-size: 16px; font-weight: 700; color: var(--muted);
+  }
+  .case-flow-val.after { color: var(--white); }
+  .case-flow-label { font-size: 11px; color: var(--muted2); }
+  .case-flow-arrow { font-size: 18px; color: var(--accent); }
+  .case-metrics { display: flex; flex-direction: column; gap: 8px; }
+  .case-metric {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+  }
+  .case-metric:last-child { border-bottom: none; }
+  .case-metric-label { font-size: 13px; color: var(--muted); }
+  .case-metric-val {
+    font-family: var(--font-head); font-size: 18px; font-weight: 700;
+    color: var(--success);
+  }
+
+  /* ─── EMPRESA ─── */
+  #empresa { background: var(--dark); }
+  .empresa-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .empresa-content p {
+    font-size: 17px; color: var(--muted); line-height: 1.8; margin-bottom: 24px;
+  }
+  .empresa-content p strong { color: var(--text); }
+  .empresa-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .empresa-badge {
+    padding: 10px 18px; border-radius: 6px;
+    background: var(--dark3); border: 1px solid var(--border2);
+    font-size: 13px; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .empresa-badge-icon { font-size: 18px; }
+  .empresa-visual {
+    background: var(--dark2); border: 1px solid var(--border2);
+    border-radius: 12px; padding: 40px; text-align: center;
+  }
+  .empresa-made {
+    font-family: var(--font-head); font-size: 72px; font-weight: 900;
+    color: var(--white); line-height: 1; margin-bottom: 4px;
+  }
+  .empresa-made-sub {
+    font-family: var(--font-head); font-size: 20px; font-weight: 400;
+    letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .empresa-tech-list { text-align: left; display: flex; flex-direction: column; gap: 12px; }
+  .empresa-tech-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px; background: var(--dark3); border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .empresa-tech-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .empresa-tech-text { font-size: 14px; color: var(--text); }
+
+  /* ─── CONTACTO ─── */
+  #contacto { background: var(--black); }
+  .contacto-grid { display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: start; }
+  .contact-form {
+    background: var(--dark2); border: 1px solid var(--border2);
+    border-radius: 12px; overflow: hidden;
+  }
+  .contact-form-head {
+    background: var(--dark3); padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-head); font-size: 14px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  }
+  .contact-form-body { padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field label {
+    display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    width: 100%; padding: 12px 16px;
+    background: var(--dark3); border: 1px solid var(--border2);
+    border-radius: 6px; color: var(--text); font-family: var(--font-body);
+    font-size: 15px; outline: none; transition: border-color 0.2s; appearance: none;
+    resize: vertical;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+    border-color: var(--accent);
+  }
+  .form-field.full { grid-column: 1 / -1; }
+  .contact-info-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-info-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .contact-info-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--accent-dim); border: 1px solid rgba(232,97,10,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .contact-info-label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .contact-info-val { font-size: 16px; color: var(--white); font-weight: 500; margin-top: 2px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark); border-top: 1px solid var(--border);
+    padding: 48px 40px 32px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 40px; border-bottom: 1px solid var(--border); gap: 60px;
+  }
+  .footer-brand { max-width: 300px; }
+  .footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
+  .footer-links-group h4 {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted2); margin-bottom: 16px;
+  }
+  .footer-links-group ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links-group a {
+    font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links-group a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px; font-size: 13px; color: var(--muted2);
+  }
+
+  /* ─── NOTA PROTOTIPO ─── */
+  .proto-note {
+    position: fixed; bottom: 20px; left: 20px; z-index: 200;
+    background: var(--accent); color: white;
+    padding: 8px 16px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; box-shadow: 0 4px 20px rgba(232,97,10,0.4);
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .calc-section-grid { grid-template-columns: 1fr; }
+    .apps-grid { grid-template-columns: 1fr 1fr; }
+    .cases-grid { grid-template-columns: 1fr 1fr; }
+    .empresa-grid { grid-template-columns: 1fr; }
+    .contacto-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .apps-grid { grid-template-columns: 1fr; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .footer-top { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NOTA PROTOTIPO -->
+<div class="proto-note">⚡ Prototipo orientativo</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <div class="nav-logo-icon">C</div>
+    CÉFIRO
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#calculadora">Cómo funciona</a></li>
+    <li><a href="#aplicaciones">Aplicaciones</a></li>
+    <li><a href="#casos">Casos reales</a></li>
+    <li><a href="#empresa">Empresa</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#calculadora" class="btn-nav">Calcular</a>
+    <a href="#contacto" class="btn-nav btn-nav-fill">Hablar con asesor</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag reveal">Fabricado 100% en Argentina</div>
+      <h1 class="reveal reveal-delay-1">
+        VENTILACIÓN<br>
+        <span class="accent">INDUSTRIAL</span><br>
+        PARA GRANDES<br>SUPERFICIES
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">Un solo ventilador cubre hasta 1.600 m²</p>
+      <p class="reveal reveal-delay-2">Reducí el calor, el consumo energético y mejorá el confort en depósitos, fábricas, gimnasios y espacios comerciales.</p>
+      <div class="hero-btns reveal reveal-delay-3">
+        <a href="#calculadora" class="btn btn-primary">Calcular ventilador para mi espacio →</a>
+        <a href="#productos" class="btn btn-secondary">Ver todos los modelos</a>
+        <a href="https://wa.me/5491155098791" class="btn btn-ghost">Hablar con asesor</a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div>
+          <div class="hero-stat-num">70<span>%</span></div>
+          <div class="hero-stat-label">ahorro energético</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">-8<span>°C</span></div>
+          <div class="hero-stat-label">sensación térmica</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1.600<span>m²</span></div>
+          <div class="hero-stat-label">cobertura máxima</div>
+        </div>
+      </div>
+    </div>
+    <!-- MINI CALC en hero -->
+    <div class="hero-card reveal reveal-delay-3">
+      <div class="hero-card-head">Calculadora rápida</div>
+      <div class="hero-card-body">
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label>Superficie (m²)</label>
+            <input type="number" id="hc-sup" placeholder="ej: 800" oninput="heroCalc()">
+          </div>
+          <div class="calc-field">
+            <label>Tipo de espacio</label>
+            <select id="hc-tipo" onchange="heroCalc()">
+              <option value="">Seleccionar</option>
+              <option value="deposito">Depósito / Galpón</option>
+              <option value="industria">Industria / Fábrica</option>
+              <option value="gimnasio">Gimnasio / Comercial</option>
+              <option value="campo">Campo / Ganadería</option>
+            </select>
+          </div>
+        </div>
+        <div id="hc-result" class="calc-result">
+          <div class="calc-result-label">Recomendación</div>
+          <div class="calc-result-model" id="hc-model">CF<span>73/6</span></div>
+          <div class="calc-result-meta">
+            <div class="calc-meta-item">
+              <div class="calc-meta-val" id="hc-cant">1 <span>unidad</span></div>
+              <div class="calc-meta-key">Cantidad necesaria</div>
+            </div>
+            <div class="calc-meta-item">
+              <div class="calc-meta-val" id="hc-ahorro">65<span>%</span></div>
+              <div class="calc-meta-key">Ahorro estimado</div>
+            </div>
+          </div>
+        </div>
+        <a href="#contacto" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px;font-size:13px;">
+          Recibir asesoramiento técnico →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="container">
+    <div class="products-header">
+      <div>
+        <div class="section-tag reveal">Catálogo</div>
+        <h2 class="section-title reveal">Nuestros<br>Ventiladores</h2>
+        <p class="section-sub reveal">Elegí el modelo según tu superficie. Cada uno reemplaza decenas de ventiladores convencionales.</p>
+      </div>
+      <a href="#" class="btn btn-ghost reveal" style="flex-shrink:0;">Descargar ficha técnica (PDF)</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="prod-badge">HVLS</div>
+        <div class="prod-model">CF36<span style="color:var(--muted);font-size:20px;">/6</span></div>
+        <div class="prod-type">Ventilador de techo industrial</div>
+        <div class="prod-specs">
+          <div class="prod-spec">
+            <span class="prod-spec-key">Diámetro</span>
+            <span class="prod-spec-val">3,6 <span style="font-size:14px;color:var(--muted)">m</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Cobertura</span>
+            <span class="prod-spec-val">680 <span style="font-size:14px;color:var(--muted)">m²</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Consumo</span>
+            <span class="prod-spec-val">1,1 <span style="font-size:14px;color:var(--muted)">kW/h</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Reemplaza</span>
+            <span class="prod-spec-val">13 <span class="accent">ventiladores</span></span>
+          </div>
+        </div>
+        <a href="#contacto" class="prod-link">Ver ficha completa →</a>
+      </div>
+      <div class="product-card reveal reveal-delay-1">
+        <div class="prod-badge">HVLS</div>
+        <div class="prod-model">CF49<span style="color:var(--muted);font-size:20px;">/6</span></div>
+        <div class="prod-type">Ventilador de techo industrial</div>
+        <div class="prod-specs">
+          <div class="prod-spec">
+            <span class="prod-spec-key">Diámetro</span>
+            <span class="prod-spec-val">4,9 <span style="font-size:14px;color:var(--muted)">m</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Cobertura</span>
+            <span class="prod-spec-val">1.050 <span style="font-size:14px;color:var(--muted)">m²</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Consumo</span>
+            <span class="prod-spec-val">1,3 <span style="font-size:14px;color:var(--muted)">kW/h</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Reemplaza</span>
+            <span class="prod-spec-val">21 <span class="accent">ventiladores</span></span>
+          </div>
+        </div>
+        <a href="#contacto" class="prod-link">Ver ficha completa →</a>
+      </div>
+      <div class="product-card reveal reveal-delay-2">
+        <div class="prod-badge">HVLS</div>
+        <div class="prod-model">CF61<span style="color:var(--muted);font-size:20px;">/6</span></div>
+        <div class="prod-type">Ventilador de techo industrial</div>
+        <div class="prod-specs">
+          <div class="prod-spec">
+            <span class="prod-spec-key">Diámetro</span>
+            <span class="prod-spec-val">6,1 <span style="font-size:14px;color:var(--muted)">m</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Cobertura</span>
+            <span class="prod-spec-val">1.430 <span style="font-size:14px;color:var(--muted)">m²</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Consumo</span>
+            <span class="prod-spec-val">1,5 <span style="font-size:14px;color:var(--muted)">kW/h</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Reemplaza</span>
+            <span class="prod-spec-val">28 <span class="accent">ventiladores</span></span>
+          </div>
+        </div>
+        <a href="#contacto" class="prod-link">Ver ficha completa →</a>
+      </div>
+      <div class="product-card featured reveal reveal-delay-3">
+        <div class="prod-badge">MÁS VENDIDO</div>
+        <div class="prod-model">CF73<span style="color:var(--muted);font-size:20px;">/6</span></div>
+        <div class="prod-type">Ventilador de techo industrial</div>
+        <div class="prod-specs">
+          <div class="prod-spec">
+            <span class="prod-spec-key">Diámetro</span>
+            <span class="prod-spec-val">7,3 <span style="font-size:14px;color:var(--muted)">m</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Cobertura</span>
+            <span class="prod-spec-val accent">1.600 <span style="font-size:14px;color:var(--muted)">m²</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Consumo</span>
+            <span class="prod-spec-val">1,5 <span style="font-size:14px;color:var(--muted)">kW/h</span></span>
+          </div>
+          <div class="prod-spec">
+            <span class="prod-spec-key">Reemplaza</span>
+            <span class="prod-spec-val">32 <span class="accent">ventiladores</span></span>
+          </div>
+        </div>
+        <a href="#contacto" class="prod-link">Ver ficha completa →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CALCULADORA + CÓMO FUNCIONA -->
+<section id="calculadora">
+  <div class="container">
+    <div class="calc-section-grid">
+      <div>
+        <div class="section-tag reveal">Calculadora de ventilación</div>
+        <h2 class="section-title reveal">Calculá tu<br>ventilación ideal</h2>
+        <p class="section-sub reveal" style="margin-bottom:40px;">Ingresá los datos de tu espacio y obtené la recomendación automática + ahorro estimado en segundos.</p>
+        <div class="calc-big reveal">
+          <div class="calc-big-head">Calculadora de ventilación — resultado en segundos</div>
+          <div class="calc-big-body">
+            <div class="calc-row">
+              <div class="calc-field-big">
+                <label>Superficie (m²)</label>
+                <input type="number" id="cs-sup" placeholder="ej: 1200" oninput="sectionCalc()">
+              </div>
+              <div class="calc-field-big">
+                <label>Altura del techo (m)</label>
+                <input type="number" id="cs-alt" placeholder="ej: 8" oninput="sectionCalc()">
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field-big">
+                <label>Tipo de espacio</label>
+                <select id="cs-tipo" onchange="sectionCalc()">
+                  <option value="">Seleccionar</option>
+                  <option value="deposito">Depósito / Galpón</option>
+                  <option value="industria">Industria / Fábrica</option>
+                  <option value="gimnasio">Gimnasio / Comercial</option>
+                  <option value="campo">Campo / Ganadería</option>
+                  <option value="hangar">Hangar / Aeródromo</option>
+                </select>
+              </div>
+              <div class="calc-field-big">
+                <label>Ciudad / Temperatura</label>
+                <select id="cs-clima">
+                  <option value="templado">Buenos Aires (templado)</option>
+                  <option value="caluroso">NEA / NOA (caluroso)</option>
+                  <option value="frio">Patagonia (frío)</option>
+                </select>
+              </div>
+            </div>
+            <div id="cs-result" class="calc-big-result">
+              <div class="calc-big-result-title">✓ Recomendación para tu espacio</div>
+              <div class="calc-big-result-main" id="cs-model">CF<span>73/6</span></div>
+              <div style="font-size:14px;color:var(--muted);margin-top:6px;" id="cs-desc">Ideal para depósitos de 1000–1600 m²</div>
+              <div class="calc-big-stats">
+                <div class="calc-big-stat">
+                  <div class="calc-big-stat-num" id="cs-cant"><span class="neg">1</span></div>
+                  <div class="calc-big-stat-label">ventiladores necesarios</div>
+                </div>
+                <div class="calc-big-stat">
+                  <div class="calc-big-stat-num"><span class="pos" id="cs-ahorro">-65%</span></div>
+                  <div class="calc-big-stat-label">consumo eléctrico</div>
+                </div>
+                <div class="calc-big-stat">
+                  <div class="calc-big-stat-num"><span class="pos" id="cs-temp">-7°C</span></div>
+                  <div class="calc-big-stat-label">sensación térmica</div>
+                </div>
+              </div>
+              <div class="calc-cta-strip">
+                <div class="calc-cta-text"><strong>¿Querés confirmar esta recomendación con un ingeniero?</strong><br>Sin costo. Respuesta en menos de 24hs.</div>
+                <a href="#contacto" class="btn btn-primary" style="flex-shrink:0;font-size:13px;">Recibir asesoramiento →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag reveal">Cómo funciona</div>
+        <h2 class="section-title reveal">HVLS:<br>Alto volumen,<br>bajo consumo</h2>
+        <div style="margin-top:32px;">
+          <div class="how-step reveal">
+            <div class="how-num">1</div>
+            <div class="how-content">
+              <h3>Flujo masivo a baja velocidad</h3>
+              <p>Mueve grandes volúmenes de aire de forma silenciosa, creando una brisa natural que recorre todo el espacio de manera uniforme.</p>
+            </div>
+          </div>
+          <div class="how-step reveal reveal-delay-1">
+            <div class="how-num">2</div>
+            <div class="how-content">
+              <h3>Destruye la estratificación térmica</h3>
+              <p>En invierno baja el aire caliente acumulado en el techo. En verano crea efecto evaporativo que baja la sensación térmica entre 5° y 8°C.</p>
+              <div class="pill">Solo 1,1–1,5 kW/h de consumo</div>
+            </div>
+          </div>
+          <div class="how-step reveal reveal-delay-2">
+            <div class="how-num">3</div>
+            <div class="how-content">
+              <h3>Un equipo reemplaza a decenas</h3>
+              <p>Un CF73/6 reemplaza hasta 32 ventiladores convencionales, reduciendo instalación, mantenimiento y consumo de forma drástica.</p>
+            </div>
+          </div>
+          <div class="how-step reveal reveal-delay-3">
+            <div class="how-num">4</div>
+            <div class="how-content">
+              <h3>Instalación simple, mantenimiento mínimo</h3>
+              <p>No requiere herramientas especiales. Componentes fabricados en Argentina garantizan reposición inmediata ante cualquier falla.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- APLICACIONES -->
+<section id="aplicaciones">
+  <div class="container">
+    <div class="section-tag reveal">Dónde se instalan</div>
+    <h2 class="section-title reveal">Aplicaciones</h2>
+    <p class="section-sub reveal">Soluciones específicas para cada tipo de espacio y necesidad industrial.</p>
+  </div>
+  <div class="apps-grid" style="margin-top:48px;">
+    <div class="app-card reveal">
+      <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=60" alt="Depósitos y galpones">
+      <div class="app-card-content">
+        <div class="app-card-label">Hasta 5.000 m²</div>
+        <div class="app-card-title">Depósitos y<br>Mayoristas</div>
+        <div class="app-card-desc">Elimina calor acumulado y estratificación. Ideal para espacios de 1.000 a 5.000 m².</div>
+      </div>
+      <div class="app-card-arrow">→</div>
+    </div>
+    <div class="app-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&q=60" alt="Industria">
+      <div class="app-card-content">
+        <div class="app-card-label">Automotriz · Alimenticia · Metalúrgica</div>
+        <div class="app-card-title">Industria<br>y Fábricas</div>
+        <div class="app-card-desc">Mejora el confort y la productividad en naves industriales y plantas de producción.</div>
+      </div>
+      <div class="app-card-arrow">→</div>
+    </div>
+    <div class="app-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=60" alt="Gimnasios">
+      <div class="app-card-content">
+        <div class="app-card-label">Silencioso · Bajo consumo</div>
+        <div class="app-card-title">Gimnasios y<br>Espacios Comerciales</div>
+        <div class="app-card-desc">Flujo de aire constante sin ruido. Perfecto para shoppings, salones y centros deportivos.</div>
+      </div>
+      <div class="app-card-arrow">→</div>
+    </div>
+    <div class="app-card reveal">
+      <img src="https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=800&q=60" alt="Hangares">
+      <div class="app-card-content">
+        <div class="app-card-label">Aeropuertos · Aeródromos</div>
+        <div class="app-card-title">Hangares y<br>Talleres</div>
+        <div class="app-card-desc">Evitan la humedad localizada y espantan aves. Instalación segura en techos de gran altura.</div>
+      </div>
+      <div class="app-card-arrow">→</div>
+    </div>
+    <div class="app-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=60" alt="Campo y ganadería">
+      <div class="app-card-content">
+        <div class="app-card-label">Tambos · Corrales · Granjas</div>
+        <div class="app-card-title">Campo y<br>Ganadería</div>
+        <div class="app-card-desc">Controlan humedad y espantan insectos. Mejoran el bienestar animal y reducen pérdidas.</div>
+      </div>
+      <div class="app-card-arrow">→</div>
+    </div>
+    <div class="app-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800&q=60" alt="Hoteles y eventos">
+      <div class="app-card-content">
+        <div class="app-card-label">Hotels · Shoppings · Templos</div>
+        <div class="app-card-title">Espacios<br>Comunes</div>
+        <div class="app-card-desc">Estética cuidada para espacios donde la imagen importa tanto como el confort.</div>
+      </div>
+      <div class="app-card-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASOS REALES -->
+<section id="casos">
+  <div class="container">
+    <div class="section-tag reveal">Prueba social</div>
+    <h2 class="section-title reveal">Casos reales<br>de éxito</h2>
+    <p class="section-sub reveal">No solo logos — resultados concretos con datos verificables de clientes reales.</p>
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-company">Atlas Hipermayorista</div>
+        <div class="case-title">5.000 m² de depósito comercial con calor extremo</div>
+        <div class="case-flow">
+          <div class="case-flow-item">
+            <div class="case-flow-val">30</div>
+            <div class="case-flow-label">ventiladores antes</div>
+          </div>
+          <div class="case-flow-arrow">→</div>
+          <div class="case-flow-item">
+            <div class="case-flow-val after">4 × CF73</div>
+            <div class="case-flow-label">Céfiro instalados</div>
+          </div>
+        </div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">Temperatura percibida</span>
+            <span class="case-metric-val">-7 °C</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Consumo eléctrico</span>
+            <span class="case-metric-val">-65%</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Mantenimiento mensual</span>
+            <span class="case-metric-val">30 → 4</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1">
+        <div class="case-company">Tambo La Estancia</div>
+        <div class="case-title">1.800 m² — Reducción de humedad y mejora animal</div>
+        <div class="case-flow">
+          <div class="case-flow-item">
+            <div class="case-flow-val">Axiales</div>
+            <div class="case-flow-label">sistema anterior</div>
+          </div>
+          <div class="case-flow-arrow">→</div>
+          <div class="case-flow-item">
+            <div class="case-flow-val after">2 × CF49</div>
+            <div class="case-flow-label">instalados</div>
+          </div>
+        </div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">Amoníaco y humedad</span>
+            <span class="case-metric-val">Reducido</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Confort animal</span>
+            <span class="case-metric-val">+22%</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Insectos</span>
+            <span class="case-metric-val">-80%</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2">
+        <div class="case-company">Crossfit / Gimnasio Privado</div>
+        <div class="case-title">1.200 m² — Confort en entrenamiento intenso</div>
+        <div class="case-flow">
+          <div class="case-flow-item">
+            <div class="case-flow-val">25</div>
+            <div class="case-flow-label">ventiladores de pared</div>
+          </div>
+          <div class="case-flow-arrow">→</div>
+          <div class="case-flow-item">
+            <div class="case-flow-val after">1 × CF61</div>
+            <div class="case-flow-label">instalado</div>
+          </div>
+        </div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">Percepción de clientes</span>
+            <span class="case-metric-val">"Aire libre"</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Ruido</span>
+            <span class="case-metric-val">Casi nulo</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Consumo total</span>
+            <span class="case-metric-val">-70%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EMPRESA -->
+<section id="empresa">
+  <div class="container">
+    <div class="empresa-grid">
+      <div class="empresa-content">
+        <div class="section-tag reveal">La historia</div>
+        <h2 class="section-title reveal">La empresa<br>detrás de<br>Céfiro</h2>
+        <p class="reveal">El fundador de Céfiro conoció los mega-ventiladores HVLS en Estados Unidos y Europa. Después de <strong>años de pruebas y desarrollo</strong> con software Autodesk Inventor & Product Design Suite, creó la primera línea de ventiladores gigantes <strong>fabricada 100% en Argentina</strong>.</p>
+        <p class="reveal">Hoy fabricamos con componentes de primer nivel — motoreductores SEW Eurodrive — y materiales locales, garantizando repuestos inmediatos y un producto adaptado al mercado argentino.</p>
+        <div class="empresa-badges reveal">
+          <div class="empresa-badge"><span class="empresa-badge-icon">🇦🇷</span> Fabricado en Argentina</div>
+          <div class="empresa-badge"><span class="empresa-badge-icon">🔧</span> Repuestos inmediatos</div>
+          <div class="empresa-badge"><span class="empresa-badge-icon">📐</span> Normas internacionales</div>
+          <div class="empresa-badge"><span class="empresa-badge-icon">⚙️</span> SEW Eurodrive</div>
+        </div>
+      </div>
+      <div class="empresa-visual reveal">
+        <div class="empresa-made">100%</div>
+        <div class="empresa-made-sub">Argentino</div>
+        <div class="empresa-tech-list">
+          <div class="empresa-tech-item">
+            <div class="empresa-tech-dot"></div>
+            <div class="empresa-tech-text">Diseño con Autodesk Inventor & Product Design Suite</div>
+          </div>
+          <div class="empresa-tech-item">
+            <div class="empresa-tech-dot"></div>
+            <div class="empresa-tech-text">Motoreductores SEW Eurodrive de primera calidad</div>
+          </div>
+          <div class="empresa-tech-item">
+            <div class="empresa-tech-dot"></div>
+            <div class="empresa-tech-text">Todas las piezas fabricadas localmente con reposición garantizada</div>
+          </div>
+          <div class="empresa-tech-item">
+            <div class="empresa-tech-dot"></div>
+            <div class="empresa-tech-text">Motor a baja velocidad: prácticamente insonoro</div>
+          </div>
+          <div class="empresa-tech-item">
+            <div class="empresa-tech-dot"></div>
+            <div class="empresa-tech-text">Cumple normas internacionales de seguridad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-grid">
+      <div>
+        <div class="section-tag reveal">Contacto</div>
+        <h2 class="section-title reveal">¿Listo para<br>reducir costos?</h2>
+        <p class="section-sub reveal" style="margin-bottom:40px;">Completá el formulario y en menos de 24hs te enviamos la cotización técnica personalizada — sin cargo.</p>
+        <div class="contact-form reveal">
+          <div class="contact-form-head">Solicitar cotización técnica</div>
+          <div class="contact-form-body">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Nombre</label>
+                <input type="text" placeholder="Tu nombre">
+              </div>
+              <div class="form-field">
+                <label>Empresa</label>
+                <input type="text" placeholder="Nombre de la empresa">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>Email</label>
+                <input type="email" placeholder="email@empresa.com">
+              </div>
+              <div class="form-field">
+                <label>Teléfono</label>
+                <input type="tel" placeholder="+54 9 11 ...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>Tipo de espacio</label>
+                <select>
+                  <option>Depósito / Galpón</option>
+                  <option>Industria / Fábrica</option>
+                  <option>Gimnasio</option>
+                  <option>Campo / Ganadería</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>Superficie aproximada (m²)</label>
+                <input type="number" placeholder="ej: 1500">
+              </div>
+            </div>
+            <div class="form-field full" style="grid-column:1/-1">
+              <label>Mensaje (opcional)</label>
+              <textarea rows="3" placeholder="Contanos más sobre tu proyecto..."></textarea>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;">
+              Enviar y recibir cotización →
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="margin-top:80px;">
+          <div class="contact-info-items">
+            <div class="contact-info-item reveal">
+              <div class="contact-info-icon">📱</div>
+              <div>
+                <div class="contact-info-label">WhatsApp / Llamadas</div>
+                <div class="contact-info-val">+54 9 11 5509-8791</div>
+              </div>
+            </div>
+            <div class="contact-info-item reveal reveal-delay-1">
+              <div class="contact-info-icon">✉️</div>
+              <div>
+                <div class="contact-info-label">Email</div>
+                <div class="contact-info-val">info@cefiro.com.ar</div>
+              </div>
+            </div>
+            <div class="contact-info-item reveal reveal-delay-2">
+              <div class="contact-info-icon">📍</div>
+              <div>
+                <div class="contact-info-label">Dirección</div>
+                <div class="contact-info-val">Av. de Mayo 1371, Villa Adelina<br>Buenos Aires, Argentina</div>
+              </div>
+            </div>
+          </div>
+          <!-- Logos clientes -->
+          <div style="margin-top:40px;padding:28px;background:var(--dark2);border:1px solid var(--border);border-radius:10px;" class="reveal">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">Empresas que confían en Céfiro</div>
+            <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+              <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;">FORD</div>
+              <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;">ATLAS</div>
+              <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;">MARLEW</div>
+              <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;">ORT</div>
+              <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;">QUILMES</div>
+              <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;">MINOTAURO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#inicio" class="nav-logo" style="margin-bottom:12px;display:inline-flex;">
+          <div class="nav-logo-icon">C</div>
+          CÉFIRO
+        </a>
+        <p>Ventiladores industriales HVLS fabricados en Argentina. Más de 15 años ventilando grandes superficies.</p>
+      </div>
+      <div class="footer-links-group">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#productos">CF36/6</a></li>
+          <li><a href="#productos">CF49/6</a></li>
+          <li><a href="#productos">CF61/6</a></li>
+          <li><a href="#productos">CF73/6</a></li>
+          <li><a href="#">Extractores industriales</a></li>
+          <li><a href="#">Cortinas de aire</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h4>Aplicaciones</h4>
+        <ul>
+          <li><a href="#aplicaciones">Depósitos y galpones</a></li>
+          <li><a href="#aplicaciones">Industria</a></li>
+          <li><a href="#aplicaciones">Gimnasios</a></li>
+          <li><a href="#aplicaciones">Ganadería</a></li>
+          <li><a href="#aplicaciones">Hangares</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#empresa">Nuestra historia</a></li>
+          <li><a href="#casos">Casos de éxito</a></li>
+          <li><a href="#">Guía de ventilación industrial</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Céfiro Ventilación — Todos los derechos reservados</div>
+      <div style="display:flex;gap:16px;">
+        <a href="https://www.instagram.com/cefiroventilacion/" style="color:var(--muted2);text-decoration:none;font-size:13px;">Instagram</a>
+        <a href="#" style="color:var(--muted2);text-decoration:none;font-size:13px;">LinkedIn</a>
+        <a href="#" style="color:var(--muted2);text-decoration:none;font-size:13px;">Facebook</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── calculadora hero ── */
+  const models = {
+    small:  { name: "CF36/6", cobertura: 680,  replace: 13, ahorro: 60 },
+    medium: { name: "CF49/6", cobertura: 1050, replace: 21, ahorro: 63 },
+    large:  { name: "CF61/6", cobertura: 1430, replace: 28, ahorro: 66 },
+    xlarge: { name: "CF73/6", cobertura: 1600, replace: 32, ahorro: 68 },
+  };
+
+  function getModel(sup) {
+    if (sup <= 680)  return models.small;
+    if (sup <= 1050) return models.medium;
+    if (sup <= 1430) return models.large;
+    return models.xlarge;
+  }
+
+  function heroCalc() {
+    const sup = parseFloat(document.getElementById('hc-sup').value);
+    const tipo = document.getElementById('hc-tipo').value;
+    if (!sup || !tipo) return;
+    const m = getModel(sup);
+    const cant = Math.ceil(sup / m.cobertura);
+    document.getElementById('hc-model').innerHTML = m.name.slice(0,-3) + '<span>/' + m.name.slice(-1) + '</span>';
+    document.getElementById('hc-cant').innerHTML = cant + ' <span>unidad' + (cant > 1 ? 'es' : '') + '</span>';
+    document.getElementById('hc-ahorro').innerHTML = m.ahorro + '<span>%</span>';
+    document.getElementById('hc-result').classList.add('show');
+  }
+
+  function sectionCalc() {
+    const sup  = parseFloat(document.getElementById('cs-sup').value);
+    const tipo = document.getElementById('cs-tipo').value;
+    if (!sup || !tipo) return;
+    const m = getModel(sup);
+    const cant = Math.ceil(sup / m.cobertura);
+    const descs = {
+      deposito: 'Ideal para depósitos y galpones de gran superficie',
+      industria: 'Optimizado para naves industriales y fábricas',
+      gimnasio:  'Perfecto para espacios comerciales y deportivos',
+      campo:     'Diseñado para establos, tambos y corrales',
+      hangar:    'Apto para grandes alturas y espacios abiertos',
+    };
+    document.getElementById('cs-model').innerHTML = m.name.slice(0,4) + '<span>' + m.name.slice(4) + '</span>';
+    document.getElementById('cs-desc').textContent = descs[tipo] || '';
+    document.getElementById('cs-cant').innerHTML = '<span class="neg">' + cant + '</span>';
+    document.getElementById('cs-ahorro').textContent = '-' + m.ahorro + '%';
+    document.getElementById('cs-result').classList.add('show');
+  }
+
+  /* ── scroll reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
