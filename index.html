@@ -30,8 +30,6 @@
     --font-body: 'Barlow', sans-serif;
   }
 
-
- 
   html { scroll-behavior: smooth; }
 
   body {
@@ -97,9 +95,15 @@
   }
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1800&q=70');
+    background-size: cover; background-position: center 40%;
+  }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(232,97,10,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 80% at 90% 80%, rgba(232,97,10,0.04) 0%, transparent 60%);
+      linear-gradient(to right, rgba(10,10,10,0.97) 40%, rgba(10,10,10,0.75) 100%),
+      linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 70% 40%, rgba(232,97,10,0.08) 0%, transparent 70%);
   }
   .hero-grid {
     position: absolute; inset: 0; z-index: 0; opacity: 0.03;
